@@ -1,4 +1,4 @@
-namespace CPUWindowsFormFramework
+namespace CPUWindowsFormsFramework
 {
     internal static class Program
     {
@@ -10,7 +10,7 @@ namespace CPUWindowsFormFramework
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-            CPUWindowsFormsFramework.ApplicationConfiguration.Initialize();
+            ApplicationConfiguration.Initialize();
         }
     }
 }

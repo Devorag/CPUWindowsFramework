@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CPUWindowsFormFramework
+namespace CPUWindowsFormsFramework
 {
     public class WindowsFormsUtility
     {
@@ -17,10 +17,11 @@ namespace CPUWindowsFormFramework
             lst.DataBindings.Add("SelectedValue", targetdt, lst.ValueMember, false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
+
         public static void SetControlBinding(Control ctrl, DataTable dt)
         {
             string propertyName = "";
-            string controlName = ctrl.Name.ToLower(); 
+            string controlName = ctrl.Name.ToLower();
             string controltype = controlName.Substring(0, 3);
             string columnName = controlName.Substring(3);
             switch (controltype)
@@ -40,13 +41,14 @@ namespace CPUWindowsFormFramework
             }
         }
 
-        public static void FormatGridForSearchResults(DataGridView grid)
-        {
-            grid.AllowUserToAddRows = false;
-            grid.ReadOnly = true;
-            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        }
 
+            public static void FormatGridForSearchResults(DataGridView grid)
+            {
+                grid.AllowUserToAddRows = false;
+                grid.ReadOnly = true;
+                grid.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.AllCells;
+                grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            }
+        }
     }
-}
+
