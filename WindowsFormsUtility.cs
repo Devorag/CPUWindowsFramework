@@ -1,7 +1,4 @@
 ﻿using System.Data;
-using System.DirectoryServices.ActiveDirectory;
-using System.Text.Json;
-using System.Xml.Linq;
 
 namespace CPUWindowsFormFramework
 {
@@ -51,35 +48,18 @@ namespace CPUWindowsFormFramework
 
             grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DoFormatGrid(grid, tablename);
+
+            grid.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            grid.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 9.75F, FontStyle.Bold);
+            grid.RowHeadersVisible = false;
+
+            grid.Dock = DockStyle.Fill;
         }
 
         public static void FormatGridForEdit(DataGridView grid, string tablename)
         {
             grid.EditMode = DataGridViewEditMode.EditOnEnter;
             DoFormatGrid(grid, tablename);
-        }
-
-        public static int GetIdFromGrid(DataGridView grid, int rowindex, string columnname)
-        {
-            int id = 0;
-            if(rowindex < grid.Rows.Count && grid.Columns.Contains(columnname) && grid.Rows[rowindex].Cells[columnname].Value != DBNull.Value)
-            {
-                if (grid.Rows[rowindex].Cells[columnname].Value is int)
-                {
-                    id = (int)grid.Rows[rowindex].Cells[columnname].Value;
-                }
-            }
-            return id;
-        }
-
-        public static int GetIdFromComboBox(ComboBox lst)
-        {
-            int value = 0;
-            if(lst.SelectedValue != null && lst.SelectedValue is int)
-            {
-                value = (int)lst.SelectedValue;
-            }
-            return value;
         }
 
         private static void DoFormatGrid(DataGridView grid, string tablename)
@@ -100,6 +80,29 @@ namespace CPUWindowsFormFramework
             }
         }
 
+        public static int GetIdFromGrid(DataGridView grid, int rowindex, string columnname)
+        {
+            int id = 0;
+            if (rowindex < grid.Rows.Count && grid.Columns.Contains(columnname) && grid.Rows[rowindex].Cells[columnname].Value != DBNull.Value)
+            {
+                if (grid.Rows[rowindex].Cells[columnname].Value is int)
+                {
+                    id = (int)grid.Rows[rowindex].Cells[columnname].Value;
+                }
+            }
+            return id;
+        }
+
+        public static int GetIdFromComboBox(ComboBox lst)
+        {
+            int value = 0;
+            if (lst.SelectedValue != null && lst.SelectedValue is int)
+            {
+                value = (int)lst.SelectedValue;
+            }
+            return value;
+        }
+
         public static void AddComboBoxToGrid(DataGridView grid, DataTable datasource, string tablename, string displaymember)
         {
             DataGridViewComboBoxColumn c = new();
@@ -115,6 +118,7 @@ namespace CPUWindowsFormFramework
         {
             grid.Columns.Add(new DataGridViewButtonColumn() { Text = "X", HeaderText = "Delete", Name = deleteColName, UseColumnTextForButtonValue = true });
         }
+
         public static bool IsFormOpen(Type formType, int pkValue = 0)
         {
             bool exists = false;
@@ -128,7 +132,7 @@ namespace CPUWindowsFormFramework
 
                 if (frm.GetType() == formType && frmpkValue == pkValue)
                 {
-                    //frm.Activate();
+                    frm.Activate();
                     exists = true;
                     break;
                 }

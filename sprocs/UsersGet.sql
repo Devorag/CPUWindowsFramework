@@ -8,7 +8,7 @@ begin
 	from Users u 
 	where u.UsersId = @UsersId 
 	or @All = 1
-	or u.UserName like '%' + @UsersName + '%'
+	or u.UsersName like '%' + @UsersName + '%'
 	order by u.LastName, u.FirstName, u.UserName
 end
 go
@@ -20,4 +20,4 @@ exec UsersGet @All = 1
 
 declare @id int 
 select top 1 @id = u.UsersId from Users u 
-exec UsersGet @UsersId = @id
+exec UsersGet @UsersId = @ids
